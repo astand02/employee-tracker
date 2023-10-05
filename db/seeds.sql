@@ -14,15 +14,20 @@ VALUES ( "Sales Lead", 100000, 1),
        ( "Legal Team Lead", 250000, 4),
        ( "Lawyer", 190000, 4);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ( "John", "Doe", 1, NULL),
-       ( "Mike", "Chan", 1, 1),
-       ( "Ashley", "Rodriguez", 2, ),
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ( "John", "Doe", 1),
+       ( "Mike", "Chan", 1),
+       ( "Ashley", "Rodriguez", 2),
        ( "Kevin", "Tupik", 2),
        ( "Kunal", "Singh", 3),
        ( "Malia", "Brown", 3),
        ( "Sarah", "Lourd", 4),
        ( "Tom", "Allen", 4);
+
+UPDATE employee SET manager_id = 1 where id = 2;
+UPDATE employee SET manager_id = 3 where id = 4;
+UPDATE employee SET manager_id = 5 where id = 6;
+UPDATE employee SET manager_id = 7 where id = 8;
 
 
        
