@@ -17,7 +17,7 @@ function mainMenu(){
     inquirer.prompt({
         type: "list",
         name: "mainMenu",
-        choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role"],
+        choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add employee", "update an employee role"],
         message: "choose one of the following options",
     })
     .then(response => {
@@ -85,7 +85,7 @@ function addRole(){
         },
         {
             type: "input",
-            message: "what is the department id",
+            message: "What is the department id?",
             name: "departmentId"
         }
     ]) 
@@ -94,7 +94,7 @@ function addRole(){
              viewRoles()
          }) 
      })
-}
+};
 
 
 function addEmployee(){
@@ -111,16 +111,38 @@ function addEmployee(){
         },
         {
             type: "input",
-            message: "What is the role ID?",
+            message: "What is the Role id?",
             name: "roleId"
         },
     ]) 
     .then(response => {
-        db.query("insert into role (first_name, last_name, role_id) values(?, ?, ?)", [response.firstName, response.lastName, response.roleId], (err, data) =>{
-            viewEmployee()
+        console.log(response)
+        db.query("insert into employee (first_name, last_name, role_id) values(?, ?, ?)", [response.firstName, response.lastName, response.roleId], (err, data) =>{
+            viewEmployees()
         }) 
     })
-}
+};
+
+
+
 function updateEmployee(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "enter emlpyee id",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "enter role id",
+            name: "roleId",
+        },
+    ])
+    .then(response => {
+        db.query("UPDATE employee set role_id = ? where id = ?", [response.roleId, response.id], (err) => {
+            viewEmployees();
+        });
+    })
+
 
 }
